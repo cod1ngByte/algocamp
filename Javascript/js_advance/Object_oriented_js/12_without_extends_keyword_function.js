@@ -34,20 +34,25 @@ function Events(dateOfTime) {
     this.dateOfTime = dateOfTime;
 }
 Events.prototype.bookEvent = function () {
-    console.log("booking events", this.name);
+    console.log("booking events", this.dateOfTime);
 };
-
-function Movie(name) {
+function Movie(name, dateOfTime) {
+    //calling event function by passing this
+    Events.call(this, dateOfTime);
     this.name = name;
 }
+
+Movie.prototype = Object.create(Events.prototype);
+//new empty object is created and that object is point to Events.prototype
+//empty object is assign to Movie.prototype
 
 Movie.prototype.showTime = function () {
     console.log("showing time", this.name);
 };
 
-// Movie.prototype.__proto__ = Events.prototype;
-Movie.prototype = Object.create(Events.prototype);
+Movie.prototype.constructor = Movie;
 
-const m = new Movie("kalki");
+const m = new Movie("kalki", "12-aug-2024");
+console.log(m);
 m.bookEvent();
-// m.showTime(); unable to access showTime , now Movie.prototype has been changed to Event.prototype
+m.showTime();

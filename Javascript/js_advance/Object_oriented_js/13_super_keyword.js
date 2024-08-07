@@ -39,12 +39,11 @@ function Movie(movieName, movieDate) {
     this.name = movieName;
 }
 
+Movie.prototype = Object.create(Event.prototype);
+
 Movie.prototype.showTime = function () {
     console.log("showing time");
 };
-
-Movie.prototype.__proto__ = Event.prototype;
-// Movie.prototype   = Object.create(Event.prototype);  event.prototype will point to new Movie.prototype
 
 const m = new Movie("kalki", "1aug'24");
 m.showTime();

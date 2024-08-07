@@ -20,7 +20,7 @@ const newObj = {
 
 obj.greet(); // normal function so this is pointing to call site : obj object
 
-// each function have access to method call apply and bind
+// each function have access to method call, apply and bind
 
 obj.greet.call(newObj); // here this will point to the first argument of call() method that is newObj
 
