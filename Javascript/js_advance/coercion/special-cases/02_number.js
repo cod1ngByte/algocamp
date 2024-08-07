@@ -8,7 +8,12 @@ console.log(0 - 0xab); // 0x10 -> hexadecimal
 console.log(0 - "0xab"); // "0x10" -> hexadecimal
 
 console.log(1 - []); // o/p : 1
+// [].valueOf() --> {}, [].toString() --> "", Number("") --> 0
+
 // o/p is -1 for below code
 console.log([] - 1);
+
 console.log([""] - 1);
+//[''].toString() --> "" , Number('') --> 0
 console.log(["0"] - 1);
+//['0'].toString() --> '0', Number('0') --> 0
