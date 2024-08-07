@@ -1,7 +1,7 @@
 function customisNaN(val) {
     if (val !== val) {
         //NaN !== NaN will return true, any other value will return false;
-        console.log(`val : ${val} is NaN`);
+        console.log(`val : ${val}, is NaN`);
     } else {
         console.log("not NaN");
     }

@@ -151,3 +151,7 @@ console.log("my function name is " + fun);
 const arr = [10, 20];
 console.log(arr.toString()); // output : '10,20', element separated by comma in string is written
 console.log(arr.valueOf()); // output : Array [ 10, 20 ], array itslef is written
+
+const arr1 = [];
+console.log(arr1.toString()); //output : ""(empty string)
+console.log(arr1.valueOf()); // output : {}, object itself which empty object

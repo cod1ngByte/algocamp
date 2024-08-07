@@ -1,6 +1,6 @@
-console.log(1 < 2 < 3); //(1< 2) < 3 --> 1  < 2 -> true < 3 --> ToPrimitive(true) --> non object --> ToNumber(true) --> 1
+console.log(1 < 2 < 3); //(1< 2) < 3 --> 1  < 2 -> true < 3 --> ToPrimitive(true,hint number) --> non object --> ToNumber(true) --> 1
 // 1 < 3 > true
-console.log(3 < 2 < 1); // (3 < 2) < 1 --> false --> ToPrimitive(false) --> non object --> ToNumber(false) --> 0
+console.log(3 < 2 < 1); // (3 < 2) < 1 --> false --> ToPrimitive(false,number) --> non object --> ToNumber(false) --> 0
 // 0  < 1  --> true
 
 console.log(3 > 2 > 1);
