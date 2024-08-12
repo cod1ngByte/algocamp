@@ -1,21 +1,24 @@
-// console.log("hello");
-// var x = 10;
-// // con z= 30;
-// console.log(x);
+let m = 0;
+let mm = 0;
+let hh = 0;
+let h = 0;
+const id = setInterval(function () {
+    // console.log(count);
 
-// function fun(y) {
-//     console.log(y);
-// }
-
-// fun(20);
-
-setTimeout(function () {
-    console.log("bye");
-}, 0);
-
-console.log("hey");
-for (let i = 0; i < 1000000000; i++) {
-    //
-}
-
-console.log("end");
+    console.log(hh, mm);
+    m++;
+    if (m == 7) {
+        h++;
+        hh = h;
+        m = 0;
+    }
+    mm = m;
+    if (hh == 3) {
+        m = 0;
+        h = 0;
+        mm = m;
+        hh = h;
+        console.log(hh, mm);
+        clearInterval(id);
+    }
+}, 1000);
