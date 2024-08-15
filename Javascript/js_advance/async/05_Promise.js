@@ -18,7 +18,7 @@ fn(function exec(res, rej) {
     res(10);
     rej(20);
 });
-
+//---------------------------------------------------how promise is created-------------------------------------------------
 */
 /**
  * new keyword :
@@ -60,7 +60,8 @@ const pr = new Promise(function exec(res, rej) {
 console.log("promise object created");
 console.log(pr);
 */
-
+//------------------------------------------------------------------------------------------
+/*
 const pr = new Promise(function exec(res, rej) {
     console.log("executer callback triggered by Promise constructor");
     setTimeout(() => {
@@ -74,4 +75,112 @@ const pr = new Promise(function exec(res, rej) {
 });
 
 console.log("promise object created");
-console.log(pr);
+console.log(pr); // pr.status will be pending but after the execution of setTimout() pr.status will be fullfilled
+*/
+//---------------------------------------------------------------------------------------------
+
+//---------------------------------------how to consume Promise---------------------------------------------
+
+/*
+console.log("start");
+setTimeout(function timerCB() {
+    console.log("timer 1 is done");
+}, 2000);
+
+const pr = new Promise(function exec(res, rej) {
+    console.log("executer callback triggered by Promise constructor");
+    setTimeout(function prCb() {
+        const randomNumber = Math.floor(Math.random() * 100);
+        if (randomNumber % 2 == 0) {
+            res(randomNumber);
+        } else {
+            rej(randomNumber);
+        }
+    }, 3000);
+});
+
+console.log("promise object created");
+
+pr.then(
+    function f() {
+        console.log("f function executed");
+    },
+    function g() {
+        console.log("g function executed");
+    }
+);
+pr.then(
+    function h() {
+        console.log("h function executed");
+    },
+    function i() {
+        console.log("i function executed");
+    }
+);
+for (let i = 0; i < 10000000000; i++) {
+    //
+}
+for (let i = 0; i < 1000000000; i++) {
+    //
+}
+console.log("end");
+
+//function f and h are stored in onFullfillment array and function g and i is stored in onRejection array
+//if state : fullfilled, then f and h will be enqueue to micorqueue
+//if state : rejected, then g and i will be enqueue to microqueue
+*/
+//----------------------------------------------------------------------------------------------------------------
+//
+console.log("start");
+const p1 = new Promise(function exec(res, rej) {
+    console.log("executer callback is triggered by Promise constructor");
+    setTimeout(function p1CB() {
+        console.log("timer of p1 done");
+        res(210);
+    }, 500);
+});
+
+console.log("p1 object created");
+//.then() --> will store the function in onFullfillment array and onRejection array it will not execute the function
+//function will be executed depending upon the res() or rej()
+//function will taken out from onFullfillment array or onRejection array and enqueue in microtask queue to execute
+p1.then(
+    function a() {
+        console.log("function a is executed");
+    },
+    function b() {
+        console.log("function b is executed");
+    }
+);
+
+setTimeout(function timerCB() {
+    console.log("timer 2 is done");
+}, 2000);
+
+const p2 = new Promise(function exec(res, rej) {
+    console.log("executer callback is triggered by Promise constructor");
+    setTimeout(function p2CB() {
+        const randomNumber = Math.floor(Math.random() * 100);
+        if (randomNumber % 2 == 0) {
+            res(randomNumber);
+        } else {
+            rej(randomNumber);
+        }
+    }, 4000);
+});
+
+console.log("p2 object created");
+//then() stored not executed
+p2.then(
+    function f() {
+        console.log("function f is executed");
+    },
+    function g() {
+        console.log("function g is executed");
+    }
+);
+
+for (let i = 0; i < 1000000000; i++) {
+    //
+}
+console.log("end");
