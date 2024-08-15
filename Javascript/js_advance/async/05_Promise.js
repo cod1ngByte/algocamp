@@ -28,6 +28,7 @@ fn(function exec(res, rej) {
  * 4. executer callback is executed
  * 5. returning the promise object created
  */
+/*
 
 const pr = new Promise(function executer(res, rej) {
     console.log("executer callback is triggered by Promise constructor");
@@ -38,4 +39,39 @@ const pr = new Promise(function executer(res, rej) {
 });
 console.log("Promise object created");
 
+console.log(pr);
+
+*/
+//--------------------------------------------------------------------------------------------------------------
+//------->changing state from pending to fullfilled or rejected according to operation of exec callback
+//
+
+/*
+const pr = new Promise(function exec(res, rej) {
+    console.log("executer callback triggered by Promise constructor");
+    const randomNumber = Math.floor(Math.random() * 100);
+    if (randomNumber % 2 === 0) {
+        res(randomNumber);
+    } else {
+        rej(randomNumber);
+    }
+});
+
+console.log("promise object created");
+console.log(pr);
+*/
+
+const pr = new Promise(function exec(res, rej) {
+    console.log("executer callback triggered by Promise constructor");
+    setTimeout(() => {
+        const randomNumber = Math.floor(Math.random() * 100);
+        if (randomNumber % 2 === 0) {
+            res(randomNumber);
+        } else {
+            rej(randomNumber);
+        }
+    }, 5000);
+});
+
+console.log("promise object created");
 console.log(pr);

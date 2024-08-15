@@ -23,16 +23,16 @@
 //     }
 // }, 1000);
 
-const f = function () {
-    console.log("file getting downloaded");
-    setTimeout(() => {
-        console.log("file downloaded");
-        // console.log('')
-        setTimeout(() => {
-            console.log("file updated");
-            setTimeout(() => {
-                console.log("file uploaded");
-            }, 3000);
-        }, 2000);
-    }, 1000);
-};
+// const f = function () {
+//     console.log("file getting downloaded");
+//     setTimeout(() => {
+//         console.log("file downloaded");
+//         // console.log('')
+//         setTimeout(() => {
+//             console.log("file updated");
+//             setTimeout(() => {
+//                 console.log("file uploaded");
+//             }, 3000);
+//         }, 2000);
+//     }, 1000);
+// };
