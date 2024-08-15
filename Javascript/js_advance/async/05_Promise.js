@@ -131,6 +131,7 @@ console.log("end");
 */
 //----------------------------------------------------------------------------------------------------------------
 //
+/*
 console.log("start");
 const p1 = new Promise(function exec(res, rej) {
     console.log("executer callback is triggered by Promise constructor");
@@ -184,3 +185,33 @@ for (let i = 0; i < 1000000000; i++) {
     //
 }
 console.log("end");
+*/
+
+//------------------------------------------------------------------------------------------
+//check output:
+setTimeout(() => {
+    console.log("timer is done");
+}, 2000);
+
+const p = new Promise((res, rej) => {
+    for (let i = 0; i < 1000000000; i++) {
+        //
+    }
+    res(90);
+    // native code
+});
+
+p.then(
+    function f() {
+        console.log("f is executed");
+    },
+    function g() {
+        console.log("g is executed");
+    }
+);
+// macro task queue [timer 2 sec]
+//micro task queue [f]
+//priority to micortask queue
+
+//output : f is executed
+// timer is done
