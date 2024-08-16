@@ -1,4 +1,4 @@
-//setTimeout is not native code of js and it is async in runtime environment of browser and nodej
+//setTimeout is not native code of js and it is async in runtime environment of browser and nodejs
 
 /*
 //below code is not executed sequentially
