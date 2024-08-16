@@ -36,3 +36,55 @@
 //         }, 2000);
 //     }, 1000);
 // };
+
+// class CustomPromise {
+//     constructor(executerCallback) {
+//         this.state = "pending";
+//         this.value;
+
+//         this.resolve = function (val) {
+//             console.log(this);
+//             // this.state = "fullfilled";
+//             // this.value = val;
+//         };
+//         this.reject = (val) => {
+//             this.state = "rejected";
+//             this.value = val;
+//         };
+//         executerCallback(this.resolve, this.reject);
+//     }
+// }
+
+// const pr = new CustomPromise(function exec(res, rej) {
+//     //
+
+//     res(10);
+// });
+
+function CustomPromise(executerCallback) {
+    this.state = "pending";
+    this.value;
+    this.resolve = function (val) {
+        console.log(this); // call site is window
+        this.state = "fullfilled";
+        this.value = val;
+    };
+    this.reject = (val) => {
+        console.log(this);
+        //scope resolved lexically and poiting to newly created object, how?
+        this.state = "rejected";
+        this.value = val;
+    };
+    executerCallback(this.resolve, this.reject);
+}
+
+const p = new CustomPromise(function exec(res, rej) {
+    // console.log(this); window
+    res(10);
+});
+
+// function fun() {
+//     console.log("inside the fun function");
+//     console.log(this);
+// }
+// fun();

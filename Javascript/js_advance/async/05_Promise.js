@@ -18,6 +18,64 @@ fn(function exec(res, rej) {
     res(10);
     rej(20);
 });
+//-----------------------------------------------------------------------------
+//------>CustomPromise
+
+function CustomPromise(executerCallback) {
+    this.state = "pending";
+    this.value;
+    // this.resolve = function (val) {
+    //     console.log(this); // call site is window
+    //     this.state = "fullfilled";
+    //     this.value = val;
+    // };
+    this.resolve = (val) =>{
+        console.log(this)//lexically ie newly created object, how??
+        // one scope up ie CustomPromise this which is newly created object
+        this.state = 'fullfilled';
+        this.value = val;
+    }
+    this.reject = (val) => {
+        console.log(this); //lexically ie newly created object, how??
+        // one scope up ie CustomPromise this which is newly created object
+        this.state = "rejected";
+        this.value = val;
+    };
+    executerCallback(this.resolve, this.reject);
+}
+
+const p = new CustomPromise(function exec(res, rej) {
+    console.log(this); //window
+    res(10);
+});
+
+//-----------------------------------------------------------------------
+
+// class CustomPromise {
+//     constructor(executerCallback) {
+//         this.state = "pending";
+//         this.value;
+
+//         this.resolve = function (val) {
+//             console.log(this); //call site ie window
+//             // this.state = "fullfilled";
+//             // this.value = val;
+//         };
+//         this.reject = (val) => {
+                //this resolved lexically ie, new object created by new keyword
+//             this.state = "rejected";
+//             this.value = val;
+//         };
+//         executerCallback(this.resolve, this.reject);
+//     }
+// }
+
+// const pr = new CustomPromise(function exec(res, rej) {
+//     //
+
+//     res(10);
+// });
+
 //---------------------------------------------------how promise is created-------------------------------------------------
 */
 /**
