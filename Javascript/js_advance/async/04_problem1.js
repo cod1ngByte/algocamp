@@ -14,9 +14,13 @@ function download(url, callback) {
         console.log("downloaded the data from ", url);
         let downloadedData = "some data";
         //what to do with the downloaded data will depend upon the callback function implementation
-        callback(downloadedData);
+        callback?.(downloadedData);
     }, 2000);
 }
+
+// download("www.def.com", function handleDownload(data) {
+//     console.log("data is downloaded",data);
+// });
 
 function writeFile(data, fileName, callback) {
     console.log("writing ", data, "to file ");
@@ -24,7 +28,7 @@ function writeFile(data, fileName, callback) {
         console.log("writing to file ", fileName, " is done");
         let status = "success";
         //what to do with the written file will depend upon the callback function implementation
-        callback(status, fileName);
+        callback?.(status, fileName);
     }, 1000);
 }
 
@@ -34,7 +38,7 @@ function upload(fileName, url, callback) {
         console.log("uploading the file is done");
         let uploadStatus = "success";
         //what to do after uploading the file will depend upon the callback implementation
-        callback(uploadStatus);
+        callback?.(uploadStatus);
     }, 3000);
 }
 
