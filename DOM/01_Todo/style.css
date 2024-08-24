@@ -1,0 +1,43 @@
+:root {
+    --body-background: #f4f4f9;
+    --btn-primary: #5cabff;
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--body-background);
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+#todoInput {
+    width: 75%; /* 75% of parent width*/
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+#addTodo {
+    padding: 10px 20px;
+    background-color: var(--btn-primary);
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
