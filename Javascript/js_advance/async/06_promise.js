@@ -65,7 +65,7 @@ function download(url) {
 }
 
 function writeFile(data, fileName) {
-    return new Promise((res, res) => {
+    return new Promise((res, rej) => {
         console.log("writing ", data, "to  file");
         setTimeout(() => {
             console.log("writing ", data, "to ", fileName, " is done");
@@ -80,8 +80,8 @@ function upload(fileName, url) {
         console.log("uploading file to url");
         setTimeout(() => {
             console.log("uploading is done");
-            let uploadinsStatus = "sucess";
-            res(uploadinsStatus);
+            let uploadStatus = "success";
+            res(uploadStatus);
         }, 3000);
     });
 }
@@ -104,7 +104,7 @@ function upload(fileName, url) {
 
 const p2 = download("www.abc.com").then(function f(value) {
     //f param value = res(val)
-    console.log("downloaded value is ", value);
+    console.log("downloaded data is ", value);
     return value;
     //jab f function execute karke value return hoga to p2 resolved ho jaega
 });
