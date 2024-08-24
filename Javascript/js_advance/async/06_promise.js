@@ -100,16 +100,51 @@ function upload(fileName, url) {
 //     console.log("upload status is ", value);
 // });
 
-//sequential execution
+//---------------->sequential execution
 
-const p2 = download("www.abc.com").then(function f(value) {
-    //f param value = res(val)
-    console.log("downloaded data is ", value);
-    return value;
-    //jab f function execute karke value return hoga to p2 resolved ho jaega
-});
+// const p2 = download("www.abc.com").then(function f(value) {
+//     //f param value = res(val)
+//     console.log("downloaded data is ", value);
+//     return value;
+//     //jab f function execute karke value return hoga to p2 resolved ho jaega
+// });
 
-p2.then(function g(value) {
-    // g param value =  p2.value
-    writeFile(value, "file1.text");
-});
+// p2.then(function g(value) {
+//     // g param value =  p2.value
+//     writeFile(value, "file1.text");
+// });
+
+// const p2 = download("www.abc.com").then(function f(value) {
+//     console.log("download data is ", value);
+//     return writeFile(value, "file1.text");
+// });
+
+// const p3 = p2.then(function g(value) {
+//     console.log("file written ", value);
+//     return upload(value, "www.xyz.com");
+// });
+
+// p3.then(function h(value) {
+//     console.log("file uploaded ", value);
+// });
+
+//download ---> waiting for download to complete ---> we execute function f ---> f call writeFile ---> when file writing is done p2 is resolved --->then g is executed ---> g calls upload ---> when upload is done ---> p3 is resolved ---> then h is executed
+
+///--------> another way of writing the same code using .then() chaining
+
+console.log("start");
+
+download("www.abc.com")
+    .then(function f(value) {
+        console.log("downloaded data ", value);
+        return writeFile(value, "file1.txt");
+    })
+    .then(function g(value) {
+        console.log("file written ", value);
+        return upload(value, "www.xyz.com");
+    })
+    .then(function h(value) {
+        console.log("file uploaded ", value);
+    });
+
+console.log("end");

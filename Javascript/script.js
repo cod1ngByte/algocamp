@@ -88,3 +88,49 @@
 // //     console.log(this);
 // // }
 // // fun();
+
+function download(url) {
+    return new Promise((res, rej) => {
+        console.log("starting downloading data");
+        setTimeout(() => {
+            let downloadedData = "some data from " + url;
+            console.log("downloaded data from url ", url);
+            res(downloadedData);
+        }, 5000);
+    });
+}
+
+function writeFile(data, fileName) {
+    return new Promise((res, rej) => {
+        console.log("writing ", data, "to  file");
+        setTimeout(() => {
+            console.log("writing ", data, "to ", fileName, " is done");
+            let status = "success";
+            res(status);
+        }, 2000);
+    });
+}
+
+function upload(fileName, url) {
+    return new Promise((res, rej) => {
+        console.log("uploading file to url");
+        setTimeout(() => {
+            console.log("uploading is done");
+            let uploadStatus = "success";
+            res(uploadStatus);
+        }, 3000);
+    });
+}
+
+download("www.abc.com")
+    .then(function f(value) {
+        console.log("downloaded data ", value);
+        return writeFile(value, "file1.txt");
+    })
+    .then(function g(value) {
+        console.log("file written ", value);
+        return upload(value, "www.xyz.com");
+    })
+    .then(function h(value) {
+        console.log("file uploaded ", value);
+    });
