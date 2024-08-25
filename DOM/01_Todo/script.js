@@ -10,6 +10,8 @@ console.log("end");
 */
 
 function loadTodos() {
+    //function will load the todos from browser
+
     // const todo = localStorage.getItem("todos");
     // console.log(todo);
     const todos = JSON.parse(localStorage.getItem("todos")) || { todoList: [] };
@@ -26,9 +28,28 @@ function addTodoToLocalStorage(todoText) {
 function appendTodoInHtml(todoText) {
     //
     const todoList = document.getElementById("taskList");
-    const li = document.createElement("li");
-    li.textContent = todoText;
-    todoList.appendChild(li);
+
+    const listItem = document.createElement("li");
+    listItem.textContent = todoText;
+    listItem.classList.add("todoItem");
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.classList.add("editBtn");
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("deleteBtn");
+
+    const completedBtn = document.createElement("button");
+    completedBtn.textContent = "Completed";
+    completedBtn.classList.add("completedBtn");
+
+    listItem.appendChild(editBtn);
+    listItem.appendChild(deleteBtn);
+    listItem.appendChild(completedBtn);
+
+    todoList.appendChild(listItem);
 }
 document.addEventListener("DOMContentLoaded", () => {
     //

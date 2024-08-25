@@ -1,6 +1,8 @@
 :root {
     --body-background: #f4f4f9;
     --btn-primary: #5cabff;
+    --btn-secondary: #8a8a8a;
+    --btn-active: #4a90e2;
 }
 
 * {
@@ -40,6 +42,10 @@ h1 {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+#addTodo:hover {
+    background-color: var(--btn-active);
 }
 
 #taskList {
@@ -57,4 +63,19 @@ h1 {
 
 #taskList li:hover {
     background-color: aliceblue;
+}
+
+.filterBtn {
+    margin-top: 10px;
+    margin-right: 5px;
+    padding: 10px 15px;
+    background-color: var(--btn-secondary);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filterBtn:hover {
+    background-color: var(--btn-active);
 }
