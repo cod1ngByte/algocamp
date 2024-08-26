@@ -18,20 +18,33 @@ function loadTodos() {
     // console.log(todos);
     return todos;
 }
-function addTodoToLocalStorage(todoText) {
+function addTodoToLocalStorage(todo) {
     //
     const todos = loadTodos();
-    todos.todoList.push(todoText);
+    todos.todoList.push(todo);
     localStorage.setItem("todos", JSON.stringify(todos));
     // console.log("added");
 }
-function appendTodoInHtml(todoText) {
+
+function appendTodoInHtml(todo) {
     //
+    //ul
+    //-->li
+    //----> textDiv --> todoText
+    //----> wrapper --> 3 button
+
     const todoList = document.getElementById("taskList");
 
     const listItem = document.createElement("li");
-    listItem.textContent = todoText;
+
+    const textDiv = document.createElement("div");
+    textDiv.textContent = todo.text;
+
+    // listItem.textContent = todoText;
     listItem.classList.add("todoItem");
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("todoButtons");
 
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
@@ -45,12 +58,45 @@ function appendTodoInHtml(todoText) {
     completedBtn.textContent = "Completed";
     completedBtn.classList.add("completedBtn");
 
-    listItem.appendChild(editBtn);
-    listItem.appendChild(deleteBtn);
-    listItem.appendChild(completedBtn);
+    wrapper.appendChild(editBtn);
+    wrapper.appendChild(deleteBtn);
+    wrapper.appendChild(completedBtn);
+
+    listItem.appendChild(textDiv);
+    listItem.appendChild(wrapper);
 
     todoList.appendChild(listItem);
 }
+
+function executeFilterAction(e) {
+    console.log(e.target);
+    const value = e.target.getAttribute("data-filter");
+    console.log(value);
+    const todoList = document.getElementById("taskList");
+    todoList.innerHTML = "";
+    const todos = loadTodos();
+    if (value === "all") {
+        //
+        todos.todoList.forEach((todo) => {
+            appendTodoInHtml(todo);
+        });
+    } else if (value !== "completed") {
+        //
+        todos.todoList.forEach((todo) => {
+            if (todo.isCompleted === false) {
+                appendTodoInHtml(todo);
+            }
+        });
+    } else {
+        //
+        todos.todoList.forEach((todo) => {
+            if (todo.isCompleted === true) {
+                appendTodoInHtml(todo);
+            }
+        });
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     //
     // console.dir(document.getElementById("todoInput"));
@@ -75,28 +121,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("addTodo");
     const todoList = document.getElementById("taskList");
 
+    const filterBtns = document.getElementsByClassName("filterBtn");
+    console.log(filterBtns);
+    for (const btn of filterBtns) {
+        btn.addEventListener("click", executeFilterAction);
+    }
+
     todoInput.addEventListener("change", (e) => {
         //
         const todoText = e.target.value;
         e.target.value = todoText.trim();
     });
+
     submitButton.addEventListener("click", (e) => {
         //
         const todoText = todoInput.value;
         if (todoText === "") {
             alert("add task");
         } else {
-            addTodoToLocalStorage(todoText);
-            appendTodoInHtml(todoText);
+            addTodoToLocalStorage({
+                text: todoText,
+                isCompleted: false,
+            });
+            appendTodoInHtml({
+                text: todoText,
+                isCompleted: false,
+            });
         }
         todoInput.value = "";
     });
 
     const todos = loadTodos();
-    todos.todoList.forEach((todoItem) => {
-        const li = document.createElement("li");
-        li.textContent = todoItem;
-
-        todoList.appendChild(li);
+    todos.todoList.forEach((todo) => {
+        appendTodoInHtml(todo);
     });
 });

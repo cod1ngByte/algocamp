@@ -3,6 +3,9 @@
     --btn-primary: #5cabff;
     --btn-secondary: #8a8a8a;
     --btn-active: #4a90e2;
+    --btn-edit: #ffd700;
+    --btn-complete: #32cd32;
+    --btn-delete: #ff6347;
 }
 
 * {
@@ -65,17 +68,37 @@ h1 {
     background-color: aliceblue;
 }
 
-.filterBtn {
-    margin-top: 10px;
-    margin-right: 5px;
-    padding: 10px 15px;
+.filterBtn,
+.editBtn,
+.completedBtn,
+.deleteBtn {
+    margin-top: 5px;
+    margin-right: 10px;
+    padding: 4px 8px;
     background-color: var(--btn-secondary);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    color: #fff;
 }
 
 .filterBtn:hover {
     background-color: var(--btn-active);
+}
+
+.editBtn {
+    background-color: var(--btn-edit);
+}
+.completedBtn {
+    background-color: var(--btn-complete);
+}
+.deleteBtn {
+    background-color: var(--btn-delete);
+}
+
+.todoItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
