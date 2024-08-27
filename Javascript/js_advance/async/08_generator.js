@@ -18,9 +18,11 @@ const it = customGenerator();
 
 console.log(it.next()); //will execute till 1st yield keyword
 console.log("outside generator");
-console.log(it.next()); // will executes from line 6 to line 7
+console.log(it.next()); 
+// will executes from line 5 to line 7, in line 5 yield 100 will be replace by the value that is passes in next()
 console.log("outside generator");
-console.log(it.next()); // will execute from line 8 to line 10
+console.log(it.next()); 
+// will executes from line 7 to line 10, in line 7 yield "rajiv" will be replace by the value that is passes in next()
 console.log("outside generator");
 */
 
@@ -45,14 +47,14 @@ console.log("out");
 */
 
 function* gen() {
-    console.log("inside generator");
-    const x = yield 999;
-    //yield will be replace by 10
-    const y = x + 30;
-    console.log(y);
-    yield 888;
+     console.log("inside generator");
+     const x = yield 999;
+     //yield will be replace by 10
+     const y = x + 30;
+     console.log(y);
+     yield 888;
 }
 
 const it = gen();
-console.log(it.next());
-console.log(it.next(10));
+console.log(it.next()); //line 50 to line 51
+console.log(it.next(10)); //line 51 to 55, replace yeild 999 by 10

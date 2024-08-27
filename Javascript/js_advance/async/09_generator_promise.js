@@ -18,7 +18,7 @@ function download(url) {
           console.log("starting downloading data");
           setTimeout(() => {
                let downloadedData = "some data from " + url;
-               console.log("downloaded data from url ", url);
+               console.log("downloaded data from url : ", downloadedData);
                res(downloadedData);
           }, 5000);
      });
@@ -47,7 +47,7 @@ function upload(fileName, url) {
 }
 
 function* exec() {
-     console.log("");
+     console.log("starting execution");
      const downloadedData = yield download("www.xyz.com"); //return a new promise --> yield promise
      //2nd time it.next(val) is called the yield download('www.xyz.com') is replaced by val which will be stored in
      // downloadedData = val
@@ -59,6 +59,8 @@ function* exec() {
 
      const uploadStatus = yield upload("file1.text", "wwww.abc.com"); //return a new promise --> yield promise
      console.log("upload status ", uploadStatus);
+
+     return uploadStatus;
 }
 
 const it = exec(); // exec() will return an generator object having an iterator
@@ -68,10 +70,9 @@ const it = exec(); // exec() will return an generator object having an iterator
 
 const ft = it.next();
 console.log(ft); // return {value: Promise, done: false}
-
 ft.value.then(function doAfterReceiving(val) {
-     console.log("calling do after ", val);
-     const ft1 = it.next(val); // resume from the last yield and replace it with pass val
+     console.log("calling doAfterReceiving ", val);
+     const ft1 = it.next(val); // resume from the last yield and replace it with pass val and execute till next yield
      console.log(ft1);
      if (ft1.done) return;
      ft1.value.then(doAfterReceiving); //calling recursively
