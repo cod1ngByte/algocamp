@@ -14,35 +14,81 @@ document.addEventListener("DOMContentLoaded", function () {
      ];
      //head body body body tail
 
-     function drawDiv() {
-          console.log("draw div");
-          const foodDiv = document.createElement("div");
-          foodDiv.classList.add("food");
-          foodDiv.style.top = `${food.y}px`;
-          foodDiv.style.left = `${food.x}px`;
+     let dx = cellSize; //+20
+     let dy = 0;
+     let intervalId;
+     function updateSnake() {
+          const newHead = { x: snakes[0].x + dx, y: snakes[0].y + dy };
+          snakes.unshift(newHead); //add new head to snake
 
-          gameArena.append(foodDiv);
+          //collison of snake head with food
+          if (newHead.x === food.x && newHead.y === food.y) {
+               score += 10;
 
-          snakes.forEach((snake) => {
-               const snakeDiv = document.createElement("div");
-               snakeDiv.classList.add("snake");
-               snakeDiv.style.top = `${snake.y}px`;
-               snakeDiv.style.left = `${snake.x}px`;
-               gameArena.appendChild(snakeDiv);
-               console.log(snake);
-          });
+               //todo : move food
+               clearInterval(intervalId);
+          } else {
+               console.log("pop");
+               snakes.pop(); //remove tail
+          }
+          console.log(snakes);
+          console.log(food);
+     }
+
+     function changeDirection(e) {
+          console.log(e);
+          const isGoingUp = dy === -cellSize;
+          const isGoingDown = dy === cellSize;
+          const isGoingLeft = dx === -cellSize;
+          const isGoingRight = dx === cellSize;
+
+          if (e.code === "ArrowUp" && !isGoingDown) {
+               dx = 0; // style.left
+               dy = -cellSize; // style.top
+          } else if (e.code === "ArrowDown" && !isGoingUp) {
+               dx = 0;
+               dy = cellSize;
+          } else if (e.code === "ArrowLeft" && !isGoingRight) {
+               dx = -cellSize;
+               dy = 0;
+          } else if (e.code === "ArrowRight" && !isGoingLeft) {
+               dx = cellSize;
+               dy = 0;
+          }
+     }
+
+     function drawDiv(xCoord, yCoord, className) {
+          const divEle = document.createElement("div");
+          divEle.classList.add(className);
+          divEle.style.top = `${yCoord}px`;
+          divEle.style.left = `${xCoord}px`;
+          return divEle;
      }
 
      function drawFoodAndSnake() {
-          console.log("draw food and snake");
-          drawDiv();
+          gameArena.innerHMTL = ""; // clear the game arena each time and redraw with the new position of food and snake
+          const foodEle = drawDiv(food.x, food.y, "food");
+          gameArena.appendChild(foodEle);
+
+          snakes.forEach((snakeCell) => {
+               const snakeEle = drawDiv(snakeCell.x, snakeCell.y, "snake");
+               gameArena.appendChild(snakeEle);
+          });
+     }
+
+     function gameLoop() {
+          intervalId = setInterval(() => {
+               updateSnake();
+               drawFoodAndSnake();
+          }, 500);
      }
      function runGame() {
           if (!isGameStarted) {
-               console.log("run game");
                isGameStarted = true;
-               drawFoodAndSnake();
-               //gameloop() -->Todo
+
+               document.addEventListener("keydown", changeDirection);
+
+               gameLoop();
           }
      }
 
@@ -60,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           //--->start button event
           startBtn.addEventListener("click", function startGame() {
-               // startBtn.style.display = "none"; //remove the button from web page layout
+               startBtn.style.display = "none"; //remove the button from web page layout
                runGame();
           });
      }
