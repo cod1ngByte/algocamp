@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ];
           dx = cellSize;
           dy = 0;
+
           drawFoodAndSnake();
           const startBtn = document.querySelector(".start-button");
           startBtn.style.display = "inline-block";
@@ -59,16 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
      function moveFood() {
           const max = 30;
           const min = 0;
-          const xCoord = Math.floor(Math.random() * (max - min) + min);
-          const yCoord = Math.floor(Math.random() * (max - min) + min);
-          if (food.x === xCoord * 20 && food.y == yCoord * 20) {
-               moveFood();
-          }
-          snakes.forEach((snake) => {
-               if (snake.x === xCoord * 20 && snake.y === yCoord * 20) {
-                    moveFood();
-               }
-          });
+
+          let xCoord, yCoord, isFoodOnSnake;
+
+          do {
+               xCoord = Math.floor(Math.random() * (max - min) + min);
+               yCoord = Math.floor(Math.random() * (max - min) + min);
+               isFoodOnSnake = snakes.some(
+                    (snake) =>
+                         snake.x === xCoord * 20 && snake.y === yCoord * 20
+               );
+          } while (isFoodOnSnake || (food.x === xCoord * 20 && food.y === yCoord * 20));
+
           food.x = xCoord * 20;
           food.y = yCoord * 20;
      }
