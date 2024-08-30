@@ -13,8 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
      const gameArenaHeight = 600;
      const ballWidth = 20;
      const ballHeight = 20;
+     const tableHeight = 80;
+     const tableWidth = 10;
      let bx = 1;
      let by = -1;
+
+     function ballAndTableCollision() {}
 
      function ballMovement() {
           // const ballEle = document.querySelector(".ball");
@@ -49,13 +53,29 @@ document.addEventListener("DOMContentLoaded", function () {
           intervalId = setInterval(() => {
                ballMovement();
                drawBallAndTable();
+               ballAndTableCollision();
           }, 10);
      }
 
+     function tableMovement(e) {
+          const tableEle = document.querySelector(".table");
+          if (e.code === "ArrowUp" && table.y > 0) {
+               table.y = table.y - 5;
+          }
+          if (e.code === "ArrowDown" && table.y < 600 - tableHeight) {
+               table.y = table.y + 5;
+          }
+     }
+
      function startGame() {
-          startBtn.style.display = "none";
-          isGameStarted = true;
-          gameLoop();
+          if (!isGameStarted) {
+               startBtn.style.display = "none";
+               isGameStarted = true;
+               drawBallAndTable();
+
+               document.addEventListener("keydown", tableMovement);
+               gameLoop();
+          }
      }
 
      function init() {
