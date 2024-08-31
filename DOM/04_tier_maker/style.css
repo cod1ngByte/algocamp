@@ -5,14 +5,14 @@
 body {
      margin: 0;
      font-family: cursive;
-     background-color: #aaaa;
+     background-color: #afa597;
 }
 h1 {
      text-align: center;
 }
 
 .container {
-     background-color: antiquewhite;
+     background-color: #e1d4c2;
      max-width: 70%;
      /* min-height: 600px; */
      margin-inline: auto;
@@ -25,7 +25,7 @@ h1 {
      /* padding-top: 10px;
      padding-bottom: 10px; */
      /* border: 1px solid red; */
-     box-shadow: 0 0 1px red;
+     box-shadow: 0 0 1px #645e56;
      margin-bottom: 5px;
      display: flex;
      align-items: center;
@@ -71,7 +71,7 @@ h1 {
 }
 
 .image-container {
-     background-color: bisque;
+     background-color: #e1d4c2;
      margin-top: 20px;
      padding: 10px;
      max-width: 70%;
