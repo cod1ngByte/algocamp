@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
      //--->draggable element
      images.forEach((image) => {
           image.addEventListener("dragstart", (e) => {
-               console.log("drag started on " + e.target.title);
+               // console.log("drag started on " + e.target.title);
                dragElement = e.target;
           });
      });
@@ -20,12 +20,19 @@ document.addEventListener("DOMContentLoaded", function () {
           box.addEventListener("dragover", (e) => {
                e.preventDefault();
           });
+          box.addEventListener("dragenter", () => {
+               box.classList.add("hover");
+          });
+          box.addEventListener("dragleave", () => {
+               box.classList.remove("hover");
+          });
 
           box.addEventListener("drop", (e) => {
-               console.log(
-                    "dragging element is getting drop on " + e.target.classList
-               );
+               // console.log(
+               //      "dragging element is getting drop on " + e.target.classList
+               // );
                box.append(dragElement);
+               box.classList.remove("hover");
                // console.log(box);
                // console.log(dragElement);
           });
@@ -49,8 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
           setting.addEventListener("click", (e) => {
                const newName = prompt("add the new name for rating ");
                if (newName) {
-                    const box = e.currentTarget.closest(".box");
-                    //closest(selector) will find the nearest parent element from current  element
+                    const box = e.target.closest(".box");
+                    //closest(selector) will find the nearest parent element from target  element
                     box.firstElementChild.textContent = newName;
                }
           });
