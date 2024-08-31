@@ -42,4 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
      imageContainer.addEventListener("drop", (e) => {
           imageContainer.append(dragElement);
      });
+
+     //---> changing the name of tier
+     const settings = document.querySelectorAll(".setting");
+     settings.forEach((setting) => {
+          setting.addEventListener("click", (e) => {
+               const newName = prompt("add the new name for rating ");
+               if (newName) {
+                    const box = e.currentTarget.closest(".box");
+                    //closest(selector) will find the nearest parent element from current  element
+                    box.firstElementChild.textContent = newName;
+               }
+          });
+     });
 });
