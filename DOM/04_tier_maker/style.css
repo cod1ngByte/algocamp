@@ -67,6 +67,7 @@ h1 {
      align-items: center;
      gap: 5px;
      flex-wrap: wrap;
+     min-height: 75px;
 
      /* justify-content: center;    */
 }
@@ -74,4 +75,5 @@ h1 {
 img {
      width: 75px;
      height: 75px;
+     margin: 10px;
 }

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
      const images = document.querySelectorAll("img");
-     console.log(images);
+
      images.forEach((image) => {
           image.setAttribute("draggable", "true");
      });
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
      });
 
-     //--->drop target element
+     //--->drop into box
      const boxes = document.querySelectorAll(".box");
      boxes.forEach((box) => {
           box.addEventListener("dragover", (e) => {
@@ -26,8 +26,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     "dragging element is getting drop on " + e.target.classList
                );
                box.append(dragElement);
-               console.log(box);
-               console.log(dragElement);
+               // console.log(box);
+               // console.log(dragElement);
           });
+     });
+
+     //--->drop back to image container
+
+     const imageContainer = document.querySelector(".image-container");
+
+     imageContainer.addEventListener("dragover", (e) => {
+          e.preventDefault();
+     });
+
+     imageContainer.addEventListener("drop", (e) => {
+          imageContainer.append(dragElement);
      });
 });
