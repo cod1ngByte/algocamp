@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="UTF-8" />
+          <meta
+               name="viewport"
+               content="width=device-width, initial-scale=1.0"
+          />
+          <title>Document</title>
+     </head>
+     <body>
+          <div class="root"></div>
+
+          <!-- react-cdn -->
+          <!-- load react core -->
+          <script
+               crossorigin
+               src="https://unpkg.com/react@18/umd/react.development.js"
+          ></script>
+
+          <!-- load react dom -->
+          <script
+               crossorigin
+               src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+          ></script>
+          <script>
+               //
+               // function App() {
+               //      return React.createElement("h1", {}, "hello world");
+               // }
+
+               // div.wrapper --> h1#mainHeading
+               function App() {
+                    return React.createElement(
+                         "div",
+                         { class: "wrapper" },
+                         React.createElement(
+                              "h1",
+                              { id: "mainHeading" },
+                              "hello world"
+                         )
+                    );
+               }
+
+               const rootContainer = document.querySelector(".root");
+               const root = ReactDOM.createRoot(rootContainer);
+               root.render(App());
+          </script>
+     </body>
+</html>
