@@ -11,7 +11,7 @@
      </head>
      <body>
           <h1>Tier List Maker</h1>
-          <div class="container">
+          <div class="wrapper">
                <div class="box box-1">
                     <div class="tier tier-1">S</div>
                     <img src="./images/settings-icon.svg" class="setting" />
@@ -33,8 +33,9 @@
                     <img src="./images/settings-icon.svg" class="setting" />
                </div>
           </div>
-          <div class="image-container">
-               <img
+
+          <div class="image-container wrapper">
+               <!-- <img
                     src="./images/atheletico-madrid.jpg"
                     alt="atheletico-madrid"
                     title="atheletico-madrid"
@@ -65,22 +66,9 @@
                     title="b-munich"
                />
                <img
-                    src="./images/bengaluru.png"
-                    alt="bengaluru"
-                    title="bengaluru"
-               />
-               <img src="./images/chelsea.png" alt="chelsea" title="chelsea" />
-               <img src="./images/chennai.png" alt="chennai" title="chennai" />
-               <img src="./images/goa.jpg" alt="goa" title="goa" />
-               <img
                     src="./images/inter-milan.jpg"
                     alt="inter-milan"
                     title="inter-milan"
-               />
-               <img
-                    src="./images/jamshedpur.png"
-                    alt="jamshedpur"
-                    title="jamshedpur"
                />
                <img
                     src="./images/juventus.png"
@@ -98,6 +86,22 @@
                     title="man-city"
                />
                <img src="./images/manu.jpg" alt="manu" title="manu" />
+               <img src="./images/chelsea.png" alt="chelsea" title="chelsea" /> -->
+
+               <img
+                    src="./images/bengaluru.png"
+                    alt="bengaluru"
+                    title="bengaluru"
+               />
+               <img src="./images/chennai.png" alt="chennai" title="chennai" />
+               <img src="./images/goa.jpg" alt="goa" title="goa" />
+
+               <img
+                    src="./images/jamshedpur.png"
+                    alt="jamshedpur"
+                    title="jamshedpur"
+               />
+
                <img
                     src="./images/mohun-bagan-super-gaint.png"
                     alt="mohan-bagan"
@@ -117,6 +121,17 @@
                <img src="./images/kerala.png" alt="kerala" title="kerala" />
                <img src="./images/punjab.png" alt="punjab" title="punjab" />
                <img src="./images/odisha.jpg" alt="odisha" title="odisha" />
+          </div>
+
+          <!-- upload image from system -->
+          <div class="upload-image-container wrapper">
+               <label for="upload-image">Upload Image from System</label>
+               <input
+                    type="file"
+                    id="upload-image"
+                    accept="image/*"
+                    style="display: none"
+               />
           </div>
           <script src="./scirpt.js"></script>
      </body>

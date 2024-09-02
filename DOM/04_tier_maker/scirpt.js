@@ -1,19 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-     const images = document.querySelectorAll("img");
-
-     images.forEach((image) => {
-          image.setAttribute("draggable", "true");
-     });
+     const inputImage = document.querySelector("#upload-image");
+     const imageContainer = document.querySelector(".image-container");
      let dragElement;
 
-     //--->draggable element
-     images.forEach((image) => {
-          image.addEventListener("dragstart", (e) => {
-               // console.log("drag started on " + e.target.title);
-               dragElement = e.target;
+     function init() {
+          const images = document.querySelectorAll("img");
+          images.forEach((image) => {
+               image.setAttribute("draggable", "true");
           });
-     });
 
+          //--->draggable element
+          images.forEach((image) => {
+               image.addEventListener("dragstart", (e) => {
+                    dragElement = e.target;
+                    // console.log(dragElement);
+               });
+          });
+     }
+
+     inputImage.addEventListener("change", uploadImages);
+
+     function uploadImages(e) {
+          const files = e.target.files;
+          for (let i = 0; i < files.length; i++) {
+               const file = files[i];
+
+               if (file.type.startsWith("image/")) {
+                    const img = document.createElement("img");
+                    img.src = URL.createObjectURL(file); // Create an object URL for the file
+                    img.setAttribute("draggable", "true");
+                    img.onload = function () {
+                         // Release the object URL after the image is loaded
+                         URL.revokeObjectURL(img.src);
+                    };
+                    imageContainer.appendChild(img);
+               }
+          }
+          init();
+     }
+
+     init();
      //--->drop into box
      const boxes = document.querySelectorAll(".box");
      boxes.forEach((box) => {
@@ -28,9 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
 
           box.addEventListener("drop", (e) => {
-               // console.log(
-               //      "dragging element is getting drop on " + e.target.classList
-               // );
+               // console.log(dragElement);
                box.append(dragElement);
                box.classList.remove("hover");
                // console.log(box);
@@ -39,8 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
      });
 
      //--->drop back to image container
-
-     const imageContainer = document.querySelector(".image-container");
 
      imageContainer.addEventListener("dragover", (e) => {
           e.preventDefault();
