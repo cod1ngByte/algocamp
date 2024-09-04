@@ -6,7 +6,7 @@ body {
 }
 .win {
      text-align: center;
-     color: #fa5252;
+     color: #37b24d;
      height: 50px;
 }
 
@@ -58,4 +58,17 @@ body {
 .player {
      text-align: center;
      color: initial;
+}
+
+button {
+     padding: 10px 20px;
+     border: none;
+     font-size: 14px;
+     background-color: #f03e3e;
+     color: #fff;
+     transform: background-color 0.4s;
+     cursor: pointer;
+}
+button:hover {
+     background-color: #c92a2a;
 }

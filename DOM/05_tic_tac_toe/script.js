@@ -5,9 +5,8 @@ function game() {
      const winPlayer = document.querySelector(".win");
      const gameArena = document.querySelector(".game-arena");
      const boxes = ["", "", "", "", "", "", "", "", ""];
-
+     let gameStart = true;
      let playerTurn = "X";
-     let playerClass = "cross";
 
      function drawBox() {
           gameArena.innerHTML = "";
@@ -21,25 +20,33 @@ function game() {
           });
      }
      drawBox();
+
      function markBoxWithCrossOrCircle(e) {
-          playerClass = playerTurn === "X" ? "cross" : "circle"; //toggle class
-          e.target.classList.add(playerClass);
+          if (gameStart) {
+               e.target.textContent = playerTurn; //update UI
+               boxes[e.target.id] = playerTurn; //update boxes array using id of box element in UI
 
-          e.target.textContent = playerTurn; //update UI
-          boxes[e.target.id] = playerTurn; //update boxes array
+               e.target.removeEventListener("click", markBoxWithCrossOrCircle); //remove event in clicked box
 
-          playerTurn = playerTurn === "X" ? "O" : "X";
-          if (playerTurn === "X") {
-               player.textContent = "Player 1 turn";
-          } else {
-               player.textContent = "Player 2 turn";
+               if (checkWin()) {
+                    //win
+                    gameStart = false;
+                    winPlayer.textContent =
+                         playerTurn == "X" ? "Player 1 win" : "Player 2 win";
+               } else if (boxes.every((box) => box !== "")) {
+                    //draw
+                    gameStart = false;
+                    winPlayer.textContent = " draw ";
+               }
+
+               playerTurn = playerTurn === "X" ? "O" : "X";
+               player.textContent =
+                    playerTurn === "X" ? "Player 1 turn" : "Player 2 turn";
           }
-          e.target.removeEventListener("click", markBoxWithCrossOrCircle);
-
-          checkWin();
      }
 
      function checkWin() {
+          // console.log("player turn ", playerTurn);
           const winningCombos = [
                [0, 1, 2],
                [3, 4, 5],
@@ -50,21 +57,18 @@ function game() {
                [0, 4, 8],
                [2, 4, 6],
           ];
-          winningCombos.forEach((winningCombo) => {
-               const isCrossWin = winningCombo.every((box) => {
-                    return boxes[box] === "X";
-               });
-               if (isCrossWin) {
-                    winPlayer.textContent = `Player 1 Win`;
-               }
-          });
-          winningCombos.forEach((winningCombo) => {
-               const isCircleWin = winningCombo.every((box) => {
-                    return boxes[box] === "O";
-               });
-               if (isCircleWin) {
-                    winPlayer.textContent = `Player 2 Win`;
-               }
+          return winningCombos.some((winningCombo) => {
+               return winningCombo.every((box) => boxes[box] === playerTurn);
           });
      }
+
+     //--->reset
+     document.querySelector("button").addEventListener("click", () => {
+          gameStart = true;
+          boxes.fill(""); // Reset boxes array
+          playerTurn = "X"; // Reset to Player X's turn
+          player.textContent = "Player 1 turn"; // Update UI
+          winPlayer.textContent = ""; // Clear win message
+          drawBox(); // Redraw the game board
+     });
 }
