@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           drawFoodAndSnake();
           const startBtn = document.querySelector(".start-button");
-          startBtn.style.display = "inline-block";
+          startBtn.style.visibility = "visible";
           console.log("end");
      }
 
@@ -162,14 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
           //--->start button event
           startBtn.addEventListener("click", function startGame() {
-               startBtn.style.display = "none"; //remove the button from web page layout
+               startBtn.style.visibility = "hidden"; //remove the button from web page layout
                scoreBoard.textContent = "";
                runGame();
           });
           //--->space bar
           document.addEventListener("keypress", (e) => {
                if (e.code === "Space") {
-                    startBtn.style.display = "none";
+                    startBtn.style.visibility = "hidden";
                     scoreBoard.textContent = "";
                     runGame();
                }
