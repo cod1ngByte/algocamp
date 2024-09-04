@@ -2,39 +2,43 @@ document.addEventListener("DOMContentLoaded", function () {
      const startBtn = document.createElement("button");
      const script = document.querySelector('[src="./script.js"]');
      const gameArena = document.querySelector(".game-arena");
+
      const scoreBoard = document.createElement("div");
 
      //initial value :
      let isGameStarted = false;
      let score = 0;
      let intervalId;
-     const ball = { x: 300, y: 280 };
-     const table = { x: 0, y: 200 };
-     const gameArenaWidth = 600;
-     const gameArenaHeight = 600;
+     const ball = { x: 300, y: 175 }; //x : left and y : top
+     const table = { x: 0, y: 135 };
+     const gameArenaWidth = gameArena.offsetWidth; //including padding and border
+     const gameArenaHeight = gameArena.offsetHeight;
      const ballWidth = 20;
      const ballHeight = 20;
-     const tableHeight = 100;
+     const tableHeight = 80;
      const tableWidth = 10;
-     let bx = 1;
-     let by = -1;
+     let bx = 2;
+     let by = 2;
+     let ty = 7.5;
 
      function resetGame() {
           score = 0;
           scoreBoard.textContent = score;
           isGameStarted = false;
-          bx = 1;
-          by = -1;
+          bx = 2;
+          by = 2;
+          ty = 7.5;
 
           ball.x = 300;
-          ball.y = 280;
+          ball.y = 175;
           table.x = 0;
-          table.y = 200;
+          table.y = 135;
           init();
      }
 
      function ballAndTableCollision() {
           if (ball.x <= 0) {
+               // alert("your game score is ", score);
                clearInterval(intervalId);
                resetGame();
           }
@@ -44,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                ball.y <= table.y + tableHeight
                //ball.y is always in between table height
           ) {
-               bx = -bx; // Reverse the ball's x horizontal direction
+               bx = bx * -1; // Reverse the ball's x horizontal direction
                score++;
                scoreBoard.textContent = score;
           }
@@ -52,11 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
      function ballMovement() {
           // const ballEle = document.querySelector(".ball");
-          if (ball.x + bx > gameArenaWidth - ballWidth) {
-               bx = -bx; // reverse the ball horizontall direction
+          // |--------|(ball)
+          // |------(ball)|
+          if (ball.x >= gameArenaWidth - ballWidth || ball.x <= 0) {
+               bx = bx * -1; // reverse the ball horizontall direction
           }
-          if (ball.y + by > gameArenaHeight - ballHeight || ball.y + by < 0) {
-               by = -by; // reverse the ball vertical direction
+          if (ball.y >= gameArenaHeight - ballHeight || ball.y <= 0) {
+               by = by * -1; // reverse the ball vertical direction
           }
           ball.x = ball.x + bx;
           ball.y = ball.y + by;
@@ -82,24 +88,27 @@ document.addEventListener("DOMContentLoaded", function () {
      function gameLoop() {
           intervalId = setInterval(() => {
                ballMovement();
-               drawBallAndTable();
                ballAndTableCollision();
-          }, 8);
+               drawBallAndTable();
+          }, 10);
      }
 
      function tableMovement(e) {
           const tableEle = document.querySelector(".table");
           if (e.code === "ArrowUp" && table.y > 0) {
-               table.y = table.y - 10;
+               table.y = table.y - ty;
           }
-          if (e.code === "ArrowDown" && table.y < 600 - tableHeight) {
-               table.y = table.y + 10;
+          if (
+               e.code === "ArrowDown" &&
+               table.y <= gameArenaHeight - tableHeight
+          ) {
+               table.y = table.y + ty;
           }
      }
 
      function startGame() {
           if (!isGameStarted) {
-               startBtn.style.display = "none";
+               startBtn.style.visibility = "hidden";
                isGameStarted = true;
 
                document.addEventListener("keydown", tableMovement);
@@ -110,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
      function init() {
           startBtn.textContent = "Start";
           startBtn.classList.add("start-button");
-          startBtn.style.display = "block";
+          startBtn.style.visibility = "visible";
           document.body.insertBefore(startBtn, script);
           scoreBoard.id = "score-board";
           scoreBoard.textContent = 0;
