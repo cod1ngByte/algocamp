@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", game);
 
 function game() {
-     console.log("loaded");
      const player = document.querySelector(".player");
      const winPlayer = document.querySelector(".win");
      const gameArena = document.querySelector(".game-arena");
@@ -36,7 +35,6 @@ function game() {
                player.textContent = "Player 2 turn";
           }
           e.target.removeEventListener("click", markBoxWithCrossOrCircle);
-          console.log(e.target);
 
           checkWin();
      }
@@ -49,12 +47,11 @@ function game() {
                [0, 3, 6],
                [1, 4, 7],
                [2, 5, 8],
-               [0, 5, 8],
+               [0, 4, 8],
                [2, 4, 6],
           ];
           winningCombos.forEach((winningCombo) => {
                const isCrossWin = winningCombo.every((box) => {
-                    console.log(typeof boxes[box]);
                     return boxes[box] === "X";
                });
                if (isCrossWin) {
@@ -63,7 +60,6 @@ function game() {
           });
           winningCombos.forEach((winningCombo) => {
                const isCircleWin = winningCombo.every((box) => {
-                    console.log(typeof boxes[box]);
                     return boxes[box] === "O";
                });
                if (isCircleWin) {
