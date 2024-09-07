@@ -1,16 +1,16 @@
 function Product(n, p, d) {
-    this.name = n;
-    this.price = p;
-    this.description = d;
+     this.name = n;
+     this.price = p;
+     this.description = d;
 
-    // function displayProduct(){ // this function is not available to this object
-    //     console.log(this);
-    // }
+     // function displayProduct(){ // this function is not available to this object
+     //     console.log(this);
+     // }
 
-    this.displayProduct = function () {
-        console.log("display product: ");
-        console.log(this);
-    };
+     this.displayProduct = function () {
+          console.log("display product: ");
+          console.log(this);
+     };
 }
 
 const p = new Product("motorola", 15000, "motog15");
@@ -46,12 +46,12 @@ p1.displayProduct();
 // what if we use arrow function as a function constructor?
 
 const Product1 = (n, p, d) => {
-    this.name = n;
-    this.price = p;
-    this.description = d;
-    this.displayProduct = function () {
-        console.log(this);
-    };
+     this.name = n;
+     this.price = p;
+     this.description = d;
+     this.displayProduct = function () {
+          console.log(this);
+     };
 };
 
 // syntax error : Product1 is not a constructor
@@ -60,12 +60,12 @@ const iphone = new Product1("apple", 20000, "iphone14");
 //------------------------------------------------------------------------------------------------------------
 // calling function constructor without a new keyword
 function Product2(n, p) {
-    this.name = n;
-    this.price = p;
-    this.displayProduct = function () {
-        console.log(this);
-    };
-    return this;
+     this.name = n;
+     this.price = p;
+     this.displayProduct = function () {
+          console.log(this);
+     };
+     return this;
 }
 
 const m = Product2("iphone14", 20);

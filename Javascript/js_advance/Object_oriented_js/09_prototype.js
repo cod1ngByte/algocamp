@@ -9,13 +9,13 @@
 // Object === Object.prototype.toString --> false
 
 class Product {
-    constructor(n, c) {
-        this.name = n;
-        this.company = c;
-    }
-    displayProduct() {
-        console.log("present in unnamed object");
-    }
+     constructor(n, c) {
+          this.name = n;
+          this.company = c;
+     }
+     displayProduct() {
+          console.log("present in unnamed object");
+     }
 }
 
 const p = new Product("mg14", "motorolla");
@@ -30,16 +30,16 @@ console.log(p); // in dev tools
  */
 
 class Product1 {
-    constructor(n, c) {
-        this.name = n;
-        this.company = c;
-        this.displayProduct = function () {
-            console.log("inside constructor display function");
-        };
-    }
-    displayProduct() {
-        console.log("present in unanmed object");
-    }
+     constructor(n, c) {
+          this.name = n;
+          this.company = c;
+          this.displayProduct = function () {
+               console.log("inside constructor display function");
+          };
+     }
+     displayProduct() {
+          console.log("present in unanmed object");
+     }
 }
 
 const p1 = new Product1("iphone14", "iphone");
@@ -49,15 +49,15 @@ console.log(p1);
 
 console.log(p1.displayProduct()); //inside constructor display function
 console.log(p1.__proto__displayProduct()); //present in unanmed object
-console.log(Product.displayProduct()); //present in unanmed object
+console.log(Product.prototype.displayProduct()); //present in unanmed object
 //---------------------------------------------------------------------------------------------
 class Product2 {
-    constructor(n) {
-        this.name = n;
-    }
-    display() {
-        console.log(this);
-    }
+     constructor(n) {
+          this.name = n;
+     }
+     display() {
+          console.log(this);
+     }
 }
 
 const p3 = new Product2("samsung");
@@ -69,11 +69,11 @@ console.log(p3.__proto__);
 console.log(p3.__proto__.__proto__); // it will point to Object unnamed entity object
 //-----------------------------------------------------------------------------------------------------
 function Product4(n) {
-    this.name = n;
-    this.display = function () {
-        // inside plain object not in protoype object
-        console.log(this);
-    };
+     this.name = n;
+     this.display = function () {
+          // inside plain object not in protoype object
+          console.log(this);
+     };
 }
 
 const p4 = new Product4("iphone");
@@ -82,7 +82,7 @@ const p4 = new Product4("iphone");
 
 //adding function in prototype
 Product4.prototype.displayProduct = function () {
-    console.log("hello");
+     console.log("hello");
 };
 //this method which is added in prototype manually is added in class syntax automatically
 
@@ -90,17 +90,17 @@ Product4.prototype.displayProduct = function () {
 // in js we can modify the function after class creation which is not possible in c++/java
 
 function Product5(n) {
-    this.name = n;
+     this.name = n;
 }
 const p5 = new Product5("samsung");
 Product5.prototype.display = function () {
-    console.log(this.name);
+     console.log(this.name);
 };
 
 p5.display(); //samsung
 
 Product5.prototype.display = function () {
-    console.log("modified  display function", this.name);
+     console.log("modified  display function", this.name);
 };
 
 p5.display();
