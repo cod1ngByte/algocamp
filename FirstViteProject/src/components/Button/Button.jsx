@@ -1,13 +1,14 @@
 // import "./Button.css";
 import getButtonBackgroundColor from "./getButtonBackgroundColor.js";
 
-function Button({ text, onClickHandler, btnType = "primary" }) {
+function Button({ text, onClickHandler, btnType = "primary", type }) {
      return (
           <button
                onClick={onClickHandler}
+               type={type}
                className={`${getButtonBackgroundColor(
                     btnType
-               )} px-4 py-2 my-2 text-black bg-orange-500`}
+               )} block font-semibold hover:text-white py-2 px-4 border  hover:border-transparent rounded mt-1.5`}
           >
                {text}
           </button>
