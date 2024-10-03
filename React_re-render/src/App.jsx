@@ -4,6 +4,7 @@ import SlowComponent from "./components/SlowComponent";
 import Modal from "./components/Modal/Modal";
 import ButtonWithModal from "./components/ButtonWithModal/ButtonWithModal";
 import useModalDialog from "./hooks/useModalDialog";
+import RefactorComponents from "./components/RefactorComponents";
 
 //---->if parent comp re-render then all its child comp also re-render
 //parent comp re-render becoz of state define in it or state getting changed in parent comp
@@ -71,6 +72,7 @@ function App() {
 // --------------------------------------------------------------------------------------------------------
 //---->custom hooks in modalwithbutton component
 // no app re-render only modalwithbutton comp and its child will re-render
+/*
 function App() {
     return (
         <>
@@ -80,6 +82,27 @@ function App() {
             <ButtonWithModal />
             <p>something done here too</p>
             <SlowComponent />
+        </>
+    );
+}
+*/
+
+//--------------------------------------------------------------------------------------------------------
+//--->what if state variable is present in app component and we cannot place it somewhere else
+// now what to do so only specific comp is only re-render not the whole app comp and its child
+//using children prop : we cann pass jsx as children prop in any component
+function App() {
+    return (
+        <>
+            <h1>React re-render</h1>
+            <RefactorComponents>
+                <>
+                    <p>something done here</p>
+                    <ButtonWithModal />
+                    <p>something done here too</p>
+                    <SlowComponent />
+                </>
+            </RefactorComponents>
         </>
     );
 }
