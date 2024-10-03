@@ -3,6 +3,7 @@ import TextInputForm from "./TextInputForm.jsx";
 
 function TextInputFormContainer() {
      const [inputType, setInputType] = useState("text");
+     //this are not normal variable these are state variable which is basically non-primitive type where we store address not directly value
      function handleChange(e) {
           console.log(e.target.value);
      }
