@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./App.css";
 import FormInput from "./components/FormInput";
 import ListItems from "./components/ListItems";
@@ -13,15 +13,18 @@ function App() {
     };
 
     const deleteItem = function (id) {
-        setodos(todos.filter((todo) => todo.id !== id));
+        const newTodos = todos.filter((todo) => todo.id !== id);
+        console.log(newTodos);
+        setodos(newTodos);
     };
 
+    const memoDeleteItem = useCallback(deleteItem, [todos]);
     return (
         <>
             <h1>Todos</h1>
             <FormInput handleSubmit={handleSubmit} />
             <ul>
-                <ListItems listOfTodos={todos} deleteItem={deleteItem} />
+                <ListItems listOfTodos={todos} deleteItem={memoDeleteItem} />
             </ul>
         </>
     );

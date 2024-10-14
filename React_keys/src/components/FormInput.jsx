@@ -1,6 +1,6 @@
-import { useState } from "react";
-
-export default function FormInput({ handleSubmit }) {
+import { memo, useState } from "react";
+import Sample from "./Sample";
+function FormInput({ handleSubmit }) {
     const [inputValue, setinputValue] = useState("");
 
     function onFormSubmit(e) {
@@ -19,7 +19,11 @@ export default function FormInput({ handleSubmit }) {
                     value={inputValue}
                 />
                 <button>Add Todo</button>
+                {/* Sample component will remount every time we enter any value in input, becoz of key prop changing in each re-render */}
+                <Sample key={Math.floor(Math.random() * 99)} />
             </form>
         </div>
     );
 }
+
+export default memo(FormInput);
