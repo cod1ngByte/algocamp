@@ -4,40 +4,24 @@ import FormInput from "./components/FormInput";
 import ListItems from "./components/ListItems";
 
 function App() {
-    const [inputValue, setinputValue] = useState("");
-    let [listItems, setlistItems] = useState([]);
+    let [todos, setodos] = useState([{ id: 1, value: "Todo 1" }]);
 
-    const handleSubmit = function (e) {
-        e.preventDefault();
+    const handleSubmit = function (inputValue) {
         console.log("submitted value : ", inputValue);
-        setinputValue("");
-        setlistItems([...listItems, inputValue]);
-        console.log(listItems);
+        setodos([...todos, { id: todos.length + 1, value: inputValue }]);
+        console.log(todos);
     };
 
-    const handleChange = function (e) {
-        setinputValue(e.target.value);
-    };
-
-    const deleteItem = function (e) {
-        console.log(e.target.value);
-        let newlistItems = [];
-        newlistItems = listItems.filter(
-            (item, idx) => `${item}-${idx + 1}` !== e.target.value
-        );
-        setlistItems(newlistItems);
+    const deleteItem = function (id) {
+        setodos(todos.filter((todo) => todo.id !== id));
     };
 
     return (
         <>
             <h1>Todos</h1>
-            <FormInput
-                inputValue={inputValue}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-            />
+            <FormInput handleSubmit={handleSubmit} />
             <ul>
-                <ListItems items={listItems} handleClick={deleteItem} />
+                <ListItems listOfTodos={todos} deleteItem={deleteItem} />
             </ul>
         </>
     );

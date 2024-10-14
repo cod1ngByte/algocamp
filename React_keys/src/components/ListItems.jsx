@@ -1,17 +1,20 @@
-export default function ListItems({ items, handleClick }) {
+import TodoListItem from "./TodoListItem";
+
+export default function ListItems({ listOfTodos, deleteItem }) {
+    function onDelete(id) {
+        console.log("delete todo with id: ", id);
+        deleteItem?.(id);
+    }
+
     return (
         <>
-            {items.map((item, idx) => {
+            {listOfTodos?.map((todo) => {
                 return (
-                    <li key={`${item}-${idx + 1}`}>
-                        {item}{" "}
-                        <button
-                            onClick={handleClick}
-                            value={`${item}-${idx + 1}`}
-                        >
-                            delete
-                        </button>
-                    </li>
+                    <TodoListItem
+                        key={todo.id}
+                        todo={todo}
+                        onDelete={onDelete}
+                    />
                 );
             })}
         </>
